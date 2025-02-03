@@ -33,8 +33,24 @@ function shallowCopy(obj) {
  *    mergeObjects([{a: 1, b: 2}, {b: 3, c: 5}]) => {a: 1, b: 5, c: 5}
  *    mergeObjects([]) => {}
  */
-function mergeObjects(/* objects */) {
-  throw new Error('Not implemented');
+function mergeObjects(objects) {
+  const result = {};
+
+  objects.forEach((obj) => {
+    const objEntries = Object.entries(obj);
+
+    objEntries.forEach((entry) => {
+      if (result[entry[0]] === undefined) {
+        const key = entry[0];
+        const value = entry[1];
+        result[key] = value;
+      } else {
+        result[entry[0]] += entry[1];
+      }
+    });
+  });
+
+  return result;
 }
 
 /**
@@ -335,7 +351,7 @@ function group(/* array, keySelector, valueSelector */) {
  */
 
 const cssSelectorBuilder = {
-  element(/* value */) {
+  element(/* value) {
     throw new Error('Not implemented');
   },
 
